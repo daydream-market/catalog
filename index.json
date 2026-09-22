@@ -1,0 +1,194 @@
+{
+  "format": "daydream",
+  "kind": "market_index",
+  "version": "1.0",
+  "updatedAt": "2026-09-22T15:20:22.674Z",
+  "entries": [
+    {
+      "storyId": "SEEDST0RYSPY40000000000000",
+      "title": "沉香庄园·1941",
+      "synopsis": "1941 年深冬，孤岛末期。一份记录日军冬季「清乡」扫荡计划的微型胶卷，随重伤昏迷的地下情报员「灯塔」藏进了杭州湾畔的沉香庄园。午夜，梅机关的封锁网悄然合拢——限三日，交出「灯塔」。护住他，把情报送出去。",
+      "tags": [
+        "谍战",
+        "阵营对抗",
+        "多人"
+      ],
+      "rating": "16+",
+      "contentLanguage": "zh-CN",
+      "type": "story",
+      "author": {
+        "id": "01M34V7FNZ6GQ4KRBW0S6H43N5",
+        "name": "daydream-market"
+      },
+      "platform": {
+        "host": "github",
+        "owner": "daydream-market"
+      },
+      "repo": "github.com/daydream-market/spy-manor",
+      "version": "1.0.0",
+      "updatedAt": "2026-09-22T15:20:22.674Z",
+      "releasedAt": "2026-09-22T15:20:22.674Z",
+      "sha256": "5bd863a1b1cad81358df5f056e1c5f1b4825e557c4c846e7b79f8518aa45a775",
+      "sizeBytes": 36666,
+      "stats": {
+        "chapters": 3,
+        "scenes": 7,
+        "words": 3889,
+        "estMinutes": 30
+      },
+      "cover": "https://raw.githubusercontent.com/daydream-market/spy-manor/main/covers/cover.svg",
+      "screenshots": [],
+      "requires": {
+        "containerVersion": "1.2",
+        "minAppVersion": "0.1.0",
+        "requiredFeatures": []
+      },
+      "metaUrl": "https://raw.githubusercontent.com/daydream-market/spy-manor/main/story.meta.json",
+      "download": [
+        {
+          "url": "https://github.com/daydream-market/spy-manor/releases/download/v1.0.0/spy-manor-v1.0.0.daydream"
+        }
+      ],
+      "keys": [
+        {
+          "pubkey": "MCowBQYDK2VwAyEAtFFzibdGtzUFLZrrpDJzwL+HS0srwyWbBU9EyVmCj5Y=",
+          "fingerprint": "826e4a9093e1eb12",
+          "validFrom": "2026-09-22T15:20:22.674Z"
+        }
+      ],
+      "permissions": {
+        "rights": {
+          "allowEdit": true,
+          "allowDerivative": true,
+          "allowRedistribute": true,
+          "allowRelist": true,
+          "requireAttribution": true
+        }
+      }
+    },
+    {
+      "storyId": "SEEDST0RY11GHT400000000000",
+      "title": "雾屿灯塔",
+      "synopsis": "南方外海的雾屿，灯塔熄了七年。年轻的守灯人江离循着姐姐留在信末的嘱托回到岛上：把她没来得及寄出的七封信一封封收齐、读完、寄出去，再把灯重新点亮。这是一个把破洞一点点补亮的故事。",
+      "tags": [
+        "剧情体验",
+        "治愈",
+        "单人/双人"
+      ],
+      "rating": "all_ages",
+      "contentLanguage": "zh-CN",
+      "type": "story",
+      "author": {
+        "id": "01M34V7FNZ6GQ4KRBW0S6H43N5",
+        "name": "daydream-market"
+      },
+      "platform": {
+        "host": "github",
+        "owner": "daydream-market"
+      },
+      "repo": "github.com/daydream-market/lighthouse",
+      "version": "1.0.0",
+      "updatedAt": "2026-09-22T15:20:22.674Z",
+      "releasedAt": "2026-09-22T15:20:22.674Z",
+      "sha256": "5754d584fbd9a4a4a42e3d02882bb2c08294ff7aee103380692d8bec8d397365",
+      "sizeBytes": 36913,
+      "stats": {
+        "chapters": 4,
+        "scenes": 6,
+        "words": 3958,
+        "estMinutes": 30
+      },
+      "cover": "https://raw.githubusercontent.com/daydream-market/lighthouse/main/covers/cover.svg",
+      "screenshots": [],
+      "requires": {
+        "containerVersion": "1.2",
+        "minAppVersion": "0.1.0",
+        "requiredFeatures": []
+      },
+      "metaUrl": "https://raw.githubusercontent.com/daydream-market/lighthouse/main/story.meta.json",
+      "download": [
+        {
+          "url": "https://github.com/daydream-market/lighthouse/releases/download/v1.0.0/lighthouse-v1.0.0.daydream"
+        }
+      ],
+      "keys": [
+        {
+          "pubkey": "MCowBQYDK2VwAyEAtFFzibdGtzUFLZrrpDJzwL+HS0srwyWbBU9EyVmCj5Y=",
+          "fingerprint": "826e4a9093e1eb12",
+          "validFrom": "2026-09-22T15:20:22.674Z"
+        }
+      ],
+      "permissions": {
+        "rights": {
+          "allowEdit": true,
+          "allowDerivative": true,
+          "allowRedistribute": true,
+          "allowRelist": true,
+          "requireAttribution": true
+        }
+      }
+    },
+    {
+      "storyId": "SEEDST0RYTRA1N300000000000",
+      "title": "凛冬号谜案",
+      "synopsis": "1935 年 1 月，奉天开往上海的夜行快车「凛冬号」被暴雪困在燕山隧道口。头等车厢的实业家霍百川死在反锁的包厢里——杯中有毒，怀表停在 2:17。天亮除雪车到场，列车重新启动，凶手将随人群散入人间。你是车上唯一的侦探。搜证、质询、指认：你只有这一夜。",
+      "tags": [
+        "硬核探案",
+        "剧本杀",
+        "单人"
+      ],
+      "rating": "16+",
+      "contentLanguage": "zh-CN",
+      "type": "story",
+      "author": {
+        "id": "01M34V7FNZ6GQ4KRBW0S6H43N5",
+        "name": "daydream-market"
+      },
+      "platform": {
+        "host": "github",
+        "owner": "daydream-market"
+      },
+      "repo": "github.com/daydream-market/snow-train",
+      "version": "1.0.0",
+      "updatedAt": "2026-09-22T15:20:22.674Z",
+      "releasedAt": "2026-09-22T15:20:22.674Z",
+      "sha256": "964c2edd4defaffc1cf67db5cb39a4d2136fbffa4dd415c31208645034aba4b9",
+      "sizeBytes": 37965,
+      "stats": {
+        "chapters": 3,
+        "scenes": 6,
+        "words": 4388,
+        "estMinutes": 30
+      },
+      "cover": "https://raw.githubusercontent.com/daydream-market/snow-train/main/covers/cover.svg",
+      "screenshots": [],
+      "requires": {
+        "containerVersion": "1.2",
+        "minAppVersion": "0.1.0",
+        "requiredFeatures": []
+      },
+      "metaUrl": "https://raw.githubusercontent.com/daydream-market/snow-train/main/story.meta.json",
+      "download": [
+        {
+          "url": "https://github.com/daydream-market/snow-train/releases/download/v1.0.0/snow-train-v1.0.0.daydream"
+        }
+      ],
+      "keys": [
+        {
+          "pubkey": "MCowBQYDK2VwAyEAtFFzibdGtzUFLZrrpDJzwL+HS0srwyWbBU9EyVmCj5Y=",
+          "fingerprint": "826e4a9093e1eb12",
+          "validFrom": "2026-09-22T15:20:22.674Z"
+        }
+      ],
+      "permissions": {
+        "rights": {
+          "allowEdit": true,
+          "allowDerivative": true,
+          "allowRedistribute": true,
+          "allowRelist": true,
+          "requireAttribution": true
+        }
+      }
+    }
+  ]
+}
