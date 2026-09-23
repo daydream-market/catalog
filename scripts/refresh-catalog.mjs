@@ -189,11 +189,14 @@ const lines = [
 ]
 console.log(lines.slice(2).join('\n'))
 
+if (!dryRun) {
+  // summary 无条件落盘：create-pull-request 的 body-path 缺文件会直接挂；无变更时它不会进提交（add-paths 仅 index.json）
+  writeFileSync(join(dirname(indexFile), 'refresh-summary.md'), lines.join('\n') + '\n')
+}
 if (!dryRun && changed) {
   index.entries = kept
   index.updatedAt = new Date().toISOString()
   writeFileSync(indexFile, JSON.stringify(index, null, 2) + '\n')
-  writeFileSync(join(dirname(indexFile), 'refresh-summary.md'), lines.join('\n') + '\n')
   console.log(`\n已写回 ${indexFile}（${kept.length} 条目）+ refresh-summary.md`)
 } else {
   console.log(dryRun ? '\n[dry-run] 未写任何文件' : '\n无内容变更，未写回（stars 同步见 sync-stars 机器人）')
