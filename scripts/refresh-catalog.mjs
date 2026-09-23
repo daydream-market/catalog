@@ -2,14 +2,15 @@
 /**
  * 目录收录机器人（21 §2.5 路径 A 的定时刷新侧）：让 index.json 跟随作者仓库的增删改自动维护——
  * ① 下架失联条目：GitHub 仓库 API 404（删库/转私有）或 Release 附件 404（作者撤回）；
- *    单次 404 即出下架动作、合并前人工把关（机器人跑在 GitHub 侧无网络墙，404 可信度高）；
+ *    单次 404 即出下架动作（机器人跑在 GitHub 侧无网络墙，404 可信度高）；
  *    网络/限额(403)/5xx 一律保守跳过不动条目，防误下架。
  * ② 版本刷新：story.meta.json 的 storyVersion 高于条目版本 → 下载新包复核 sha256/sizeBytes
  *    后全量刷新条目；新公钥追加进 keys[]（保留旧键，轮换过渡期验旧签，21 §2.5）。
  * ③ 新收录：扫 topic `daydream-story` → story.meta.json 带签名身份（signing，公钥/指纹自洽）
  *    且包体复核通过 → 生成条目；storyId 与现有条目冲突不自动收（防冒名转发，人工裁决）。
- * 变更一律走 PR 人工合并（refresh.workflow.yml，机器人不直接 push——内容变更与纯数字回写的
- * sync-stars 不同，须人审把关）；动作摘要写 refresh-summary.md 供 PR 描述引用。
+ * 变更直推（refresh.workflow.yml 内 git commit + push——21 §2.5 v0.9 口径：前期目录全自动化，
+ * git 历史即审计、误下架回滚 = revert，push 前有 verify 自检、push 后有 verify.yml 事后哨兵；
+ * 动作摘要写 refresh-summary.md 供运行日志查阅，不提交入库）。
  * 客户端零配合：已装用户不受影响，下架后更新入口由 not_in_catalog 提示（21 §3.6）。
  * 用法：node refresh-catalog.mjs [--dry-run] [--index <index.json>]
  *   部署态默认读 ../index.json（本脚本在目录仓库 scripts/ 下）；GITHUB_TOKEN env 提升 API 限额
@@ -190,7 +191,7 @@ const lines = [
 console.log(lines.slice(2).join('\n'))
 
 if (!dryRun) {
-  // summary 无条件落盘：create-pull-request 的 body-path 缺文件会直接挂；无变更时它不会进提交（add-paths 仅 index.json）
+  // summary 无条件落盘供日志查阅（不提交入库；保留以兼容未来恢复 PR 模式）
   writeFileSync(join(dirname(indexFile), 'refresh-summary.md'), lines.join('\n') + '\n')
 }
 if (!dryRun && changed) {
