@@ -1,19 +1,19 @@
 # 目录收录机器人（21 §2.5 路径 A 定时侧）——index.json 跟随作者仓库增删改自动维护：
-# 下架失联条目 / 刷新新版本 / 扫 topic:daydream-story 收录新仓库。变更一律开 PR 人工合并
-# （机器人不直接 push；纯数字的 stars 回写走既有 sync-stars 机器人直推）。
-# token：优先 secrets.CATALOG_BOT_TOKEN（fine-grained PAT：本仓库 contents RW + pull requests RW）。
-# 默认 GITHUB_TOKEN 也能开 PR，但其创建的 PR 不触发 on: pull_request（GitHub 防递归限制），
-# 上架闸门 gate.yml 不会自动跑——配置 PAT 后闸门随 PR 自动执行（结构 + 包体下载验签）。
+# 下架失联条目 / 刷新新版本 / 扫 topic:daydream-story 收录新仓库。变更直接 commit + push
+# （21 §2.5 v0.9 直推口径：前期目录全自动化，git 历史即审计、误下架回滚 = revert；
+# 顺序 = 刷新 → verify 自检（挂则不提交）→ 提交回写，push 后既有 verify.yml 作事后哨兵）。
+# 纯数字的 stars 回写走既有 sync-stars 机器人（3:17 UTC，本任务 4:23 UTC 错峰）。
+# token：默认 GITHUB_TOKEN 即可（contents: write 已声明；无 PAT 需求、不创建 PR——
+# 组织策略禁 Actions 开 PR 亦不受影响）。
 # 本文件即目录仓库部署态（主仓样板：scripts/market-catalog/refresh.workflow.yml；
-# 结构自检复用本仓库既有 scripts/verify-index.mjs——结构字段 + 传输完整性校验）。
+# 自检复用本仓库既有 scripts/verify-index.mjs——结构 + 传输完整性校验）。
 name: catalog-refresh
 on:
   schedule:
-    - cron: '23 4 * * *' # 每日一次（与 sync-stars 的 3:17 错峰）
+    - cron: '23 4 * * *'
   workflow_dispatch: {}
 permissions:
   contents: write
-  pull-requests: write
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -25,14 +25,12 @@ jobs:
         run: node scripts/refresh-catalog.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: 结构与传输完整性自检（复用本仓库校验脚本）
+      - name: 结构自检（与上架闸门同一脚本口径；挂则中止不回写）
         run: node scripts/verify-index.mjs
-      - name: 开 PR（有变更时；无变更自动跳过）
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.CATALOG_BOT_TOKEN || github.token }}
-          branch: bot/refresh
-          add-paths: index.json # 摘要文件只进 PR 描述，不入库
-          title: 'catalog: 机器人刷新（下架失联 / 版本更新 / 新收录）'
-          commit-message: 'catalog: 机器人刷新 index.json（下架失联 / 版本更新 / 新收录）'
-          body-path: refresh-summary.md
+      - name: 直推回写（有变更 commit + push；无变更跳过）
+        run: |
+          git config user.name "daydream-catalog-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.json
+          git diff --cached --quiet || git commit -m "catalog: 机器人刷新 index.json（下架失联 / 版本更新 / 新收录）"
+          git push
