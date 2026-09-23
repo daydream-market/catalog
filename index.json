@@ -64,7 +64,8 @@
           "allowRelist": true,
           "requireAttribution": true
         }
-      }
+      },
+      "stars": 1
     },
     {
       "storyId": "SEEDST0RY11GHT400000000000",
@@ -126,7 +127,8 @@
           "allowRelist": true,
           "requireAttribution": true
         }
-      }
+      },
+      "stars": 0
     },
     {
       "storyId": "SEEDST0RYTRA1N300000000000",
@@ -188,7 +190,8 @@
           "allowRelist": true,
           "requireAttribution": true
         }
-      }
+      },
+      "stars": 0
     }
   ]
 }
