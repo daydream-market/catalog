@@ -1,0 +1,23 @@
+name: catalog-sync-stars
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch: {}
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/sync-stars.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit
+        run: |
+          git config user.name daydream-bot
+          git config user.email bot@users.noreply.github.com
+          git diff --quiet || (git add index.json && git commit -m "chore: sync star counts" && git push)
