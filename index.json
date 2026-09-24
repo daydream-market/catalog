@@ -2,7 +2,7 @@
   "format": "daydream",
   "kind": "market_index",
   "version": "1.0",
-  "updatedAt": "2026-09-22T15:20:22.674Z",
+  "updatedAt": "2026-09-24T04:30:17.391Z",
   "entries": [
     {
       "storyId": "SEEDST0RYSPY40000000000000",
@@ -66,69 +66,6 @@
         }
       },
       "stars": 1
-    },
-    {
-      "storyId": "SEEDST0RY11GHT400000000000",
-      "title": "雾屿灯塔",
-      "synopsis": "南方外海的雾屿，灯塔熄了七年。年轻的守灯人江离循着姐姐留在信末的嘱托回到岛上：把她没来得及寄出的七封信一封封收齐、读完、寄出去，再把灯重新点亮。这是一个把破洞一点点补亮的故事。",
-      "tags": [
-        "剧情体验",
-        "治愈",
-        "单人/双人"
-      ],
-      "rating": "all_ages",
-      "contentLanguage": "zh-CN",
-      "type": "story",
-      "author": {
-        "id": "01M34V7FNZ6GQ4KRBW0S6H43N5",
-        "name": "daydream-market"
-      },
-      "platform": {
-        "host": "github",
-        "owner": "daydream-market"
-      },
-      "repo": "github.com/daydream-market/lighthouse",
-      "version": "1.0.0",
-      "updatedAt": "2026-09-22T15:20:22.674Z",
-      "releasedAt": "2026-09-22T15:20:22.674Z",
-      "sha256": "5754d584fbd9a4a4a42e3d02882bb2c08294ff7aee103380692d8bec8d397365",
-      "sizeBytes": 36913,
-      "stats": {
-        "chapters": 4,
-        "scenes": 6,
-        "words": 3958,
-        "estMinutes": 30
-      },
-      "cover": "https://raw.githubusercontent.com/daydream-market/lighthouse/main/covers/cover.svg",
-      "screenshots": [],
-      "requires": {
-        "containerVersion": "1.2",
-        "minAppVersion": "0.1.0",
-        "requiredFeatures": []
-      },
-      "metaUrl": "https://raw.githubusercontent.com/daydream-market/lighthouse/main/story.meta.json",
-      "download": [
-        {
-          "url": "https://github.com/daydream-market/lighthouse/releases/download/v1.0.0/lighthouse-v1.0.0.daydream"
-        }
-      ],
-      "keys": [
-        {
-          "pubkey": "MCowBQYDK2VwAyEAtFFzibdGtzUFLZrrpDJzwL+HS0srwyWbBU9EyVmCj5Y=",
-          "fingerprint": "826e4a9093e1eb12",
-          "validFrom": "2026-09-22T15:20:22.674Z"
-        }
-      ],
-      "permissions": {
-        "rights": {
-          "allowEdit": true,
-          "allowDerivative": true,
-          "allowRedistribute": true,
-          "allowRelist": true,
-          "requireAttribution": true
-        }
-      },
-      "stars": 0
     },
     {
       "storyId": "SEEDST0RYTRA1N300000000000",
