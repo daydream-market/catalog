@@ -11,7 +11,8 @@ const fail = (m) => { console.error('✗ ' + m); process.exitCode = 1 }
 
 if (index.format !== 'daydream' || index.kind !== 'market_index') fail('index 头不合法')
 if (index.version !== '2.0') fail('index 版本非 2.0（27 号 v2.0 多语言族结构）')
-if (!Array.isArray(index.entries) || index.entries.length === 0) fail('entries 为空')
+if (!Array.isArray(index.entries)) fail('entries 非数组')
+if (index.entries.length === 0) console.log('⚠ entries 为空（市集空态：全部作者仓已下架或待收录——合法过渡态）')
 
 const seenStoryIds = new Set()
 for (const e of index.entries ?? []) {
