@@ -1,0 +1,32 @@
+# PR 复核闸门（27§4.4.3）——部署到 catalog 仓库 .github/workflows/gate.yml：
+# 凡改动 index.json 的 PR（机器人候选收录 / 人工提名）自动跑结构自检 + 逐条目包体
+# verify-bundle 校验（C-1~C-8）+ sha256/size 与声明比对。通过只是准入线——
+# 内容复核（试玩/题材/侵权）仍需人工（PR 描述带复核清单）。
+name: catalog-gate
+on:
+  pull_request:
+    paths: ['index.json']
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: index.json 结构自检
+        run: node scripts/verify-catalog.mjs index.json
+      - name: 包体校验（verify-bundle C-1~C-8 + sha256/size 比对）
+        run: |
+          node -e '
+          const fs = require("fs");
+          const idx = JSON.parse(fs.readFileSync("index.json", "utf8"));
+          fs.writeFileSync("/tmp/pkgs.txt", idx.entries.map(e => e.id + " " + e.package.url + " " + e.package.sha256 + " " + e.package.size_bytes).join("\n"));
+          '
+          while read -r id url sha size; do
+            echo "── 校验 $id"
+            curl -fsSL "$url" -o "/tmp/$id.mistpack"
+            actual=$(sha256sum "/tmp/$id.mistpack" | cut -d" " -f1)
+            [ "$actual" = "$sha" ] || { echo "$id sha256 不符（$actual ≠ $sha）"; exit 1; }
+            [ "$(stat -c%s /tmp/$id.mistpack)" = "$size" ] || { echo "$id size_bytes 不符"; exit 1; }
+            node verify-bundle.mjs "/tmp/$id.mistpack" || exit 1
+          done < /tmp/pkgs.txt

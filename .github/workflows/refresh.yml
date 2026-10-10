@@ -1,0 +1,35 @@
+# 目录收录机器人（27§4.4）——部署到 catalog 仓库 .github/workflows/refresh.yml：
+# 每日健康检查（下架失联/版本刷新直推）+ 扫 topic:jubensha-script 新收录（开 PR 待人工合并 = 信任锚）。
+# permissions：contents:write 供直推与建分支；pull-requests:write 供开 PR（若 org 策略禁 Actions 开 PR，
+# 改用 fine-grained PAT 走 JUBENSHA_CATALOG_REPO 指向的仓库，见 scripts/market-catalog/README.md）。
+name: catalog-refresh
+on:
+  schedule:
+    - cron: '23 4 * * *'
+  workflow_dispatch: {}
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: 安装依赖（fflate）
+        run: npm install --no-fund --no-audit
+      - name: 刷新目录（下架失联 / 版本刷新 / 扫 topic 开 PR）
+        run: node scripts/refresh-catalog.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JUBENSHA_CATALOG_REPO: ${{ github.repository }}
+      - name: 结构自检（挂则中止不回写）
+        run: node scripts/verify-catalog.mjs index.json
+      - name: 直推回写（有变更 commit + push；无变更跳过）
+        run: |
+          git config user.name "jubensha-catalog-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.json
+          git diff --cached --quiet || git commit -m "catalog: 机器人刷新 index.json（下架失联 / 版本更新）"
+          git push
