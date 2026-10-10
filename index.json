@@ -3,5 +3,32 @@
   "kind": "market_index",
   "version": "1.0",
   "updated_at": "2026-10-10T00:41:45Z",
-  "entries": []
+  "entries": [
+    {
+      "id": "script_mist_manor",
+      "title": "雾锁山庄",
+      "author": "示例工坊",
+      "synopsis": "民国二十三年冬，丝绸商沈万堂在杭州城外的山庄庆贺六十大寿。寿宴散后大雪封山，次日亥时，老爷被发现死于书房。医生说是心疾，可茶盏里的残液、壁炉里的灰烬、还有每个来不及离开的人……雾锁山庄的真相，等你来揭开。",
+      "genres": [
+        "mystery"
+      ],
+      "player_range": [
+        6,
+        6
+      ],
+      "language": "zh-CN",
+      "rating": "all_ages",
+      "cover": null,
+      "repo": "github.com/daydream-market/script-mist-manor",
+      "released_at": "2026-10-10T01:29:46.537Z",
+      "updated_at": "2026-10-10T01:29:46.537Z",
+      "version": "1.4.0",
+      "package": {
+        "url": "https://github.com/daydream-market/script-mist-manor/releases/download/v1.4.0/mist-manor-v1.4.0.mistpack",
+        "mirrors": [],
+        "sha256": "ee6c5214b55f7b6ef3a9105cc12ef7b3c68eae335654e1a1d419df5dd69ebf80",
+        "size_bytes": 22294
+      }
+    }
+  ]
 }
