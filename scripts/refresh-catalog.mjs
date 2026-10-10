@@ -161,12 +161,15 @@ async function openPullRequest(candidateIndex, ownerId, owner, name) {
     body: JSON.stringify({ ref: `refs/heads/${branch}`, sha: head.object.sha }),
   });
   if (!pr.ok) return { warn: `建分支失败（HTTP ${pr.status}）：${await pr.text()}` };
+  // 更新分支上已存在的 index.json 必须带其 sha（Contents API 铁律；文件不存在则免）
+  const cur = await getJson(`${api('/contents/index.json')}?ref=${encodeURIComponent(branch)}`);
   const put = await fetch(api('/contents/index.json'), {
     method: 'PUT', headers: API_H,
     body: JSON.stringify({
       message: `market: 收录 ${meta0(candidateIndex)}（${owner}/${name}，待人工复核）`,
       content: Buffer.from(JSON.stringify(candidateIndex, null, 2) + '\n').toString('base64'),
       branch,
+      ...(cur?.sha != null ? { sha: cur.sha } : {}),
     }),
   });
   if (!put.ok) return { warn: `写候选 index 失败（HTTP ${put.status}）：${await put.text()}` };
@@ -188,9 +191,9 @@ async function openPullRequest(candidateIndex, ownerId, owner, name) {
   return { pr: data.html_url };
 }
 
-/** 候选 index 的首条标题（PR 文案用——候选 index 只含当条新条目） */
+/** 候选 index 的末条标题（PR 文案用——候选 index = 现有条目 + 当条新增，新增总在末位） */
 function meta0(idx) {
-  return idx?.entries?.[0]?.title ?? '?';
+  return idx?.entries?.at(-1)?.title ?? '?';
 }
 
 // ── 主流程 ──
@@ -270,7 +273,7 @@ async function main() {
           if (cov.warn != null) actions.warned.push(`新仓库 ${r.full_name}：${cov.warn}`);
           const now = new Date().toISOString();
           const candidateEntry = entryOf(x.meta, owner, name, pkg.url, buf, cov.url, now);
-          const pr = await openPullRequest({ ...index, entries: [candidateEntry] }, x.meta.id, owner, name);
+          const pr = await openPullRequest({ ...index, entries: [...index.entries, candidateEntry] }, x.meta.id, owner, name);
           if (pr.pr != null) actions.candidates.push(`《${x.meta.title}》（${r.full_name} · ${x.meta.language} v${x.meta.version}）→ ${pr.pr}`);
           else if (pr.warn != null) actions.warned.push(`新仓库 ${r.full_name}：${pr.warn}`);
         } catch (e) {
